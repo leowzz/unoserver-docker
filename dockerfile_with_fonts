@@ -1,0 +1,29 @@
+FROM ubuntu:22.04
+
+# 更新 apt 并安装软件包
+RUN apt update
+
+# 安装 LibreOffice
+RUN apt install -y libreoffice
+
+# 安装 Python 和 pip
+RUN apt install -y python3-pip
+
+# 安装中文字体包
+RUN apt install -y fonts-noto-cjk
+
+# 清理不需要的文件
+RUN apt clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY ./Fonts/* /usr/share/fonts
+
+RUN /usr/bin/python3 -m pip install unoserver
+
+ENV PYTHONIOENCODING=utf-8
+ENV LANG="zh_CN.UTF-8"
+
+EXPOSE 2002
+EXPOSE 2003
+
+CMD ["unoserver", "--interface", "0.0.0.0", "--port",  "2003", "--uno-interface", "0.0.0.0", "--uno-port", "2002"]
