@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
+from unoserver.client import UnoClient
 from fastapi import FastAPI, HTTPException, UploadFile
 from loguru import logger
 

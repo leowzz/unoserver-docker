@@ -1,0 +1,4 @@
+
+unoserver==2.0.1
+fastapi
+loguru
